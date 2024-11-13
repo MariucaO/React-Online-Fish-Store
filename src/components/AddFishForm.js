@@ -10,17 +10,23 @@ class AddFishForm extends React.Component {
   createFish = (event) => {
     // 1. Stop the form from submitting
     event.preventDefault();
+
+    // 2. Create the fish object from the form values
     const fish = {
-      name: this.nameRef.value.value,
-      price: parseFloat(this.priceRef.value.value),
-      status: this.statusRef.value.value,
-      desc: this.descRef.value.value,
-      image: this.imageRef.value.value,
+      name: this.nameRef.current.value,  // Correct usage of refs
+      price: parseFloat(this.priceRef.current.value),
+      status: this.statusRef.current.value,
+      desc: this.descRef.current.value,
+      image: this.imageRef.current.value,
     };
-   this.props.AddFish(fish);
-   // refresh the form
-   event.currentTarget.reset();
+
+    // 3. Pass the fish object to the addFish function
+    this.props.addFish(fish);
+
+    // 4. Refresh the form
+    event.currentTarget.reset();
   };
+
   render() {
     return (
       <form className="fish-edit" onSubmit={this.createFish}>
@@ -32,8 +38,7 @@ class AddFishForm extends React.Component {
           placeholder="Price"
         />
         <select name="status" ref={this.statusRef}>
-          <option value="availabel">Fresh!</option>
-          <option value="unavailabel">Sold Out!</option>
+         b
         </select>
         <textarea name="desc" ref={this.descRef} placeholder="Desc"></textarea>
         <input
